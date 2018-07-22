@@ -1,0 +1,49 @@
+<br>
+{{>success-banner}}
+<br>
+    <div class="card text-center">
+        <div class="card-header">
+            {{story.category}}
+        </div>
+        <div class="card-block">
+            <h2 class="card-title">{{story.title}}</h2>
+            <p class="card-text">
+                {{story.body}}
+            </p>            
+        </div>
+        <div class="card-footer text-muted">                    
+          Posted {{formatDate story.createdAt}} by {{story.user.username}} 
+        </div>
+        <div class="card-footer text-muted text-center">                    
+            <form action="/comment" method="POST">
+                <textarea name="comment" class="form-control" rows="10"></textarea>
+                <br>
+                <button type="submit" class="btn btn-success btn-lg"> Add Comment </button>   
+                <input type="hidden" name="postid" value="{{story._id}}">
+            </form>            
+        </div>
+    </div>
+    <div class="text-center">
+        <br><h3>Comments</h3><br>
+        {{#each story.comments}}            
+            <div class="list-group">
+                <div class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{this.user.username}}</h5>            
+                        <small>{{formatDate this.createdAt}}</small>
+                    </div>
+                    <p class="mb-1">{{this.message}}</p>                      
+                    {{#makeVisible this.user.username ../session.slug}} 
+                        <div class="text-center" style="background: white">
+                            <small style="text-color:red">                                
+                                <a href="/comment/del/{{../story._id}}&{{this._id}}">Delete</a>
+                            </small>
+                        </div>                    
+                    {{/makeVisible}}                    
+                </div>                            
+            </div>
+            <br>
+        {{/each}}        
+    </div>
+    <br><br><br>
+    

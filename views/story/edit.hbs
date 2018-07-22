@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <h1>{{title}}</h1>
+        {{>error-banner}}
+        <form action="/story/edit/{{story._id}}" method="POST">
+            <div class="form-group">
+                <label for="email">Title</label>
+                <input type="text" name="title" id="title" class="form-control" value="{{story.title}}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Category</label>
+                <select name="category" id="category">
+                    <option value="" selected>Choose Category</option>
+                    {{#each categories}}
+                    <option value="{{this.name}}" {{ isEqual this.name ../story.category }}>
+                        {{this.name}}
+                    </option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Body</label>
+                <textarea id="body" name="body" class="form-control" rows="10" cols="10">{{story.body}}</textarea>
+            </div>
+
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+            <button type="submit" class="btn btn-primary">Update Story</button>
+
+        </form>
+    </div>
+</div>

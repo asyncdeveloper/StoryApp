@@ -1,0 +1,19 @@
+<br>
+{{>success-banner}}
+<br>
+{{>error-banner}}
+<br>
+<ul class="list-group">
+    {{# each categories}}
+        <a href="/category/{{this._id}}">
+            <li class="list-group-item justify-content-between">
+                {{this.name}}
+                <a href="category/del/{{this._id}}">
+                    <span class="badge badge-danger badge-pill">Delete</span>
+                </a>                 
+            </li>
+        </a>
+    {{/each}}
+</ul>
+<hr>
+<a href="/category/add">Add New Category</a>

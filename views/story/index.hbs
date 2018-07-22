@@ -1,0 +1,23 @@
+<br>
+{{>success-banner}}
+<br>
+{{>error-banner}}
+<br>
+<h1>{{title}}</h1>
+<ul class="list-group">
+    {{# each stories }}
+        <a href="/story/{{this._id}}">
+            <li class="list-group-item justify-content-between">
+                {{this.title}}
+                <a href="story/edit/{{this._id}}">
+                    <span class="badge badge-success badge-pill">Edit</span>
+                </a>                 
+                <a href="story/del/{{this._id}}">
+                    <span class="badge badge-danger badge-pill">Delete</span>
+                </a>                 
+            </li>
+        </a>
+    {{/each}}
+</ul>
+<hr>
+<a href="/story/add">Add New Story</a>
