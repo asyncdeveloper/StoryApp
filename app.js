@@ -49,7 +49,10 @@ app.engine('.hbs', expressHbs({
 		makeVisible : function(commentUser,loggedInUser,options){
 			return commentUser === loggedInUser ? options.fn(this) : options.inverse(this);				
 		}
-	}
+	},
+    partialsDir: [
+        'views/partials/'
+    ]
 }));
 app.set('view engine', 'hbs');
 app.use(logger('dev'));
