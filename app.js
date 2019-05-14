@@ -19,8 +19,9 @@ var commentRouter  = require('./routes/comment');
 
 var app = express();
 var dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/blogapp' ;
-var sessionSeceret = process.env.SESSION_SECRET || 'mysupersecret';
-mongoose.connect(dbUrl,{ useNewUrlParser: true });
+var sessionSecret = process.env.SESSION_SECRET || 'mysupersecret';
+var rsName = process.env.RS_NAME;
+mongoose.connect(dbUrl,{ replicaSet: rsName });
 require('./config/passport');
 
 // view engine setup
@@ -54,7 +55,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(validator());
 app.use(cookieParser());
 app.use(session({
-	secret : sessionSeceret,
+	secret : sessionSecret,
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
