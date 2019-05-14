@@ -18,8 +18,9 @@ var storyRouter    = require('./routes/story');
 var commentRouter  = require('./routes/comment');
 
 var app = express();
-
-mongoose.connect('mongodb://localhost:27017/blogapp',{ useNewUrlParser: true });
+var dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/blogapp' ;
+var sessionSeceret = process.env.SESSION_SECRET || 'mysupersecret';
+mongoose.connect(dbUrl,{ useNewUrlParser: true });
 require('./config/passport');
 
 // view engine setup
@@ -53,7 +54,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(validator());
 app.use(cookieParser());
 app.use(session({
-	secret : 'mysupersecret',
+	secret : sessionSeceret,
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
