@@ -9,6 +9,7 @@ var mongoose     = require('mongoose');
 var passport     = require('passport');
 var flash        = require('connect-flash');
 var validator    = require('express-validator');
+var MongoClient  = require('mongodb').MongoClient;
 var MongoStore   = require('connect-mongo')(session);
 var moment		 = require('moment');
 
@@ -21,7 +22,12 @@ var app = express();
 var dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/blogapp' ;
 var sessionSecret = process.env.SESSION_SECRET || 'mysupersecret';
 var rsName = process.env.RS_NAME;
-mongoose.connect(dbUrl,{ replicaSet: rsName });
+
+const client = new MongoClient(dbUrl, { useNewUrlParser: true });
+client.connect(err => {
+	if(err)
+		throw new Error(err);
+});
 require('./config/passport');
 
 // view engine setup
