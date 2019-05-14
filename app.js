@@ -24,10 +24,12 @@ var sessionSecret = process.env.SESSION_SECRET || 'mysupersecret';
 var rsName = process.env.RS_NAME;
 
 const client = new MongoClient(dbUrl, { useNewUrlParser: true });
-client.connect(err => {
-	if(err)
-		throw new Error(err);
-});
+try {
+    client.connect(err => { console.log(err) });
+}catch (e) {
+	console.log(e);
+}
+
 require('./config/passport');
 
 // view engine setup
@@ -86,6 +88,9 @@ app.use('/category', categoryRouter);
 app.use('/comment',commentRouter);
 app.use('/', indexRouter);
 
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => console.log(`Listening on port ${port}...`));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -102,4 +107,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = server;
