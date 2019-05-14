@@ -9,7 +9,6 @@ var mongoose     = require('mongoose');
 var passport     = require('passport');
 var flash        = require('connect-flash');
 var validator    = require('express-validator');
-var MongoClient  = require('mongodb').MongoClient;
 var MongoStore   = require('connect-mongo')(session);
 var moment		 = require('moment');
 
@@ -21,14 +20,10 @@ var commentRouter  = require('./routes/comment');
 var app = express();
 var dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/blogapp' ;
 var sessionSecret = process.env.SESSION_SECRET || 'mysupersecret';
-var rsName = process.env.RS_NAME;
 
-const client = new MongoClient(dbUrl, { useNewUrlParser: true });
-try {
-    client.connect(err => { console.log(err) });
-}catch (e) {
-	console.log(e);
-}
+mongoose.connect(dbUrl, { useNewUrlParser: true })
+    .then( () => console.log(`Connected to ${dbUrl}...`))
+    .catch(err => console.error(`Could not connect to ${dbUrl}... ${err}`));
 
 require('./config/passport');
 
