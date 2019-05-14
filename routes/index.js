@@ -3,7 +3,7 @@ var router = express.Router();
 
 var passport        = require('passport');
 var csrf            = require('csurf') ;
-var csrfProtection  = csrf();
+var csrfProtection  = csrf({ cookie: true });
 var loggedIn        = require('../middleware/loggedIn');
 var notLoggedIn     = require('../middleware/notLoggedIn');
 var Story			= require('../models/story');

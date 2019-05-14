@@ -1,7 +1,7 @@
 var express               = require('express');
 var router                = express.Router();
 var csrf                  = require('csurf') ;
-var csrfProtection        = csrf();
+var csrfProtection        = csrf({ cookie: true });
 var Story                 = require('./../models/story');
 var storyController       = require('../controllers/storyController')(Story);
 
