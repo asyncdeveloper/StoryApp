@@ -51,7 +51,7 @@ app.engine('.hbs', expressHbs({
 		}
 	},
     partialsDir: [
-        __dirname + 'views/partials/'
+        __dirname + 'views/partials'
     ]
 }));
 app.set('view engine', 'hbs');
