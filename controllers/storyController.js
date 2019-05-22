@@ -61,8 +61,7 @@ var storyController    = function(Story){
                     if(err) throw err;                    
 
                     var errorMsg = req.flash('error');                
-                    res.render('story/edit', {
-                        csrfToken : req.csrfToken(),
+                    res.render('story/edit', {                        
                         title : 'Edit Story',
                         categories : category,
                         story : story,
@@ -80,32 +79,19 @@ var storyController    = function(Story){
             }                        
         });
     };
-    var update = function(req,res){      
-        req.checkBody("title",  "Invalid Post Name").isLength({ min:4 });                
-        req.checkBody("category",  "Kindly Choose a Category").notEmpty();                
-        req.checkBody("body",  "Invalid Body").notEmpty();                
-        var errors = req.validationErrors();       
-    
-        if (errors) {                        
-            var messages = [];
-            errors.forEach(function(error) {
-                messages.push(error.msg);
-            });        
-            req.flash("error", messages);
-            res.redirect(req.header('Referer') || '/');
-        } else {
-            var story  = {
-                title: req.body.title,    
-                body:  req.body.body,
-                category : req.body.category
-            };       
-            Story.update({ _id: req.params.id}, story, function(err, story) {
-                if (err) throw err;            
-                
-                req.flash('success','Story updated successfully');
-                res.redirect('/story');                                                                                                    
-            });                  
-        }        
+    var update = function(req,res){              
+        var story  = {
+            title: req.body.title,    
+            body:  req.body.body,
+            category : req.body.category
+        };       
+        Story.update({ _id: req.params.id}, story, function(err, story) {
+            if (err) throw err;            
+            
+            req.flash('success','Story updated successfully');
+            res.redirect('/story');                                                                                                    
+        });                  
+        
     };
     var deleteStory = function(req,res){
         Story.findByIdAndRemove(req.params.id,function(err,data){
