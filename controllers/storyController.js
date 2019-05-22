@@ -31,20 +31,7 @@ var storyController    = function(Story){
             });   
         });        
     };
-    var save = function(req,res){
-        req.checkBody("title",  "Invalid Post Name").isLength({ min:4 });                
-        req.checkBody("category",  "Kindly Choose a Category").notEmpty();                
-        req.checkBody("body",  "Invalid Body").notEmpty();                
-        var errors = req.validationErrors();       
-        if (errors) {                        
-            var messages = [];
-            errors.forEach(function(error) {
-                messages.push(error.msg);
-            }); 
-            req.flash("error", messages);
-            res.redirect(req.header('Referer') || '/');                                                                                                                                                                          
-        } 
-        else {
+    var save = function(req,res){    
             var story = new Story({                
                 title : req.body.title,
                 body : req.body.body,
