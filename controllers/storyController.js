@@ -23,8 +23,7 @@ var storyController    = function(Story){
         Category.find(function(err,category){
             if(err) throw err;
             var errorMsg = req.flash('error');                            
-            res.render('story/add', {
-                csrfToken : req.csrfToken() ,
+            res.render('story/add', {                
                 title: 'Add Story' ,
                 categories : category,
                 hasErrors : errorMsg.length > 0,

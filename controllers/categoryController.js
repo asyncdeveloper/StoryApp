@@ -19,8 +19,7 @@ var categoryController = function(Category){
     var add = function (req,res){
         var messages = req.flash('error');                
         res.render('category/add', {
-            title :'Add Category',
-            csrfToken : req.csrfToken() ,
+            title :'Add Category',            
             hasErrors : messages.length > 0,
             messages : messages            
         });

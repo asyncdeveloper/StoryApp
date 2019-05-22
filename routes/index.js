@@ -33,8 +33,7 @@ router.use(notLoggedIn);
 /* GET login page. */
 router.get('/login', function(req, res) {
     var messages = req.flash('error')
-	res.render('home/login',{
-		csrfToken : req.csrfToken() ,
+	res.render('home/login',{	
 		messages : messages,
 		hasErrors : messages.length > 0
 	});
@@ -60,8 +59,7 @@ router.post('/login',passport.authenticate('local.login',{
 /* GET register page. */
 router.get('/register', function(req, res) {
     var messages = req.flash('error')
-	res.render('home/register',{
-		csrfToken : req.csrfToken() ,
+	res.render('home/register',{		
 		messages : messages,
         hasErrors : messages.length > 0
 	});
