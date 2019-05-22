@@ -31,26 +31,25 @@ var storyController    = function(Story){
             });   
         });        
     };
-    var save = function(req,res){    
-            var story = new Story({                
-                title : req.body.title,
-                body : req.body.body,
-                category :  req.body.category ,
-                user : {
-                    id : req.user._id,
-                    username : req.session.slug,
-                    email : req.user.email
-                }                
-            });
-            story.save(function(err,result){            
-                if(err) {                                    
-                    req.flash("error",err);
-                    res.redirect(req.header('Referer') || '/');                                                                                                                                                       
-                }                     
-                req.flash('success','Story saved successfully');
-                res.redirect('/story');                                                                                                                               
-            });                                                               
-        }                         
+    var save = function(req,res){                    
+        var story = new Story({                
+            title : req.body.title,
+            body : req.body.body,
+            category :  req.body.category ,
+            user : {
+                id : req.user._id,
+                username : req.session.slug,
+                email : req.user.email
+            }                
+        });
+        story.save(function(err,result){            
+            if(err) {                                    
+                req.flash("error",err);
+                res.redirect(req.header('Referer') || '/');                                                                                                                                                       
+            }                     
+            req.flash('success','Story saved successfully');
+            res.redirect('/story');                                                                                                                               
+        });                                                                        
     };
     var getById = function(req,res){
         Story.findById(req.params.id,function(err,story){
@@ -79,7 +78,7 @@ var storyController    = function(Story){
             }                        
         });
     };
-    var update = function(req,res){              
+    var update = function(req,res){      
         var story  = {
             title: req.body.title,    
             body:  req.body.body,
@@ -90,8 +89,7 @@ var storyController    = function(Story){
             
             req.flash('success','Story updated successfully');
             res.redirect('/story');                                                                                                    
-        });                  
-        
+        });                          
     };
     var deleteStory = function(req,res){
         Story.findByIdAndRemove(req.params.id,function(err,data){
