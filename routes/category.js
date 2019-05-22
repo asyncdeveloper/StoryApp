@@ -7,7 +7,7 @@ var categoryController    = require('../controllers/categoryController')(Categor
 
 var loggedIn              = require('../middleware/loggedIn');
 
-router.use(csrfProtection);
+//router.use(csrfProtection);
 router.use(loggedIn);
 
 router.route('')  // category

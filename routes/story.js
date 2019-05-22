@@ -8,7 +8,7 @@ var storyController       = require('../controllers/storyController')(Story);
 var loggedIn              = require('../middleware/loggedIn');
 
 router.use(loggedIn);
-router.use(csrfProtection);
+//router.use(csrfProtection);
 
 router.route('')  // story
     .get(storyController.get);

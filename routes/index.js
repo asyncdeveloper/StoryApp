@@ -8,7 +8,7 @@ var loggedIn        = require('../middleware/loggedIn');
 var notLoggedIn     = require('../middleware/notLoggedIn');
 var Story			= require('../models/story');
 
-router.use(csrfProtection);
+//router.use(csrfProtection);
 
 /* GET home page. */
 router.get('/', function(req, res) {
