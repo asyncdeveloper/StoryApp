@@ -2,18 +2,11 @@
     <div class="col-md-4 col-md-offset-4">
         <h1>{{title}}</h1>
         {{>error-banner}}
-        <form action="/story/add" method="POST" enctype="multipart/form-data">
+        <form action="/story/add" method="POST">
             <div class="form-group">
                 <label for="email">Title</label>
                 <input type="text" name="title" id="title" class="form-control">                
             </div>            
-
-            <div class="form-group">
-                <label for="image">Image</label>
-                <input type="file" name="image">
-                
-            </div>       
-
 
             <div class="form-group">
                 <label for="email">Category</label>
